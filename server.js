@@ -1,7 +1,6 @@
-const express = require("express");
-const { request } = require("http");
-const path = require("path");
-const posts = require("./routes/posts");
+import express from "express";
+import path from "path";
+import posts from "./routes/posts.js";
 const port = process.env.PORT;
 const app = express();
 
