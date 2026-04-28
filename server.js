@@ -15,10 +15,9 @@ let posts = [
   const limit = parseInt(req.query.limit);
 
   if (!isNaN(limit) && limit > 0) {
-    res.status(200).json(posts.slice(0, limit));
-  } else {
-    res.status(200).json(posts);
+    return res.status(200).json(posts.slice(0, limit));
   }
+  res.status(200).json(posts);
 }),
   //get a single posts
   (app.get("/api/posts/:id", (req, res) => {
@@ -26,9 +25,8 @@ let posts = [
     const post = posts.find((post) => post.id === id);
 
     if (!post) {
-      res.status(404).json({ msg: `Post Not Found` });
-    } else {
-      res.status(200).json(post);
+      return res.status(404).json({ msg: `Post Not Found` });
     }
+    res.status(200).json(post);
   }),
   app.listen(port, () => console.log(`Server is running on port ${port}`))));
