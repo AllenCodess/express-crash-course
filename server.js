@@ -1,6 +1,7 @@
 const express = require("express");
+const { request } = require("http");
 const path = require("path");
-
+const port = process.env.PORT;
 const app = express();
 
 let posts = [
@@ -9,9 +10,15 @@ let posts = [
   { id: 3, title: "Post Three" },
 ];
 
+// get all posts
 (app.get("/api/posts", (req, res) => {
   res.json(posts);
 }),
+  //get a single posts
+  (app.get("/api/posts/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    res.json(posts.filter((post) => post.id === id));
+  }),
   // app.get("/", (req, res) => {
   //   res.sendFile(path.join(__dirname, "public", "index.html"));
   // });
@@ -20,4 +27,4 @@ let posts = [
   //   res.sendFile(path.join(__dirname, "public", "about.html"));
   // });
 
-  app.listen(8000, () => console.log(`Server is running on poinrt 8000`)));
+  app.listen(port, () => console.log(`Server is running on port ${port}`))));
